@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "fixed-villager-trades",
+  "version": "${version}",
+
+  "name": "Fixed Villager Trades",
+  "description": "A mod that makes villagers remember their occupation trades.",
+  "authors": [
+    "Qu"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/fixed-villager-trades/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "qu.fixedVillagerTrades.FixedVillagerTrades"
+    ]
+  },
+  "mixins": [
+    "fixed-villager-trades.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

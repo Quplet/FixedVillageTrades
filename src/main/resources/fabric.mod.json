@@ -4,16 +4,17 @@
   "version": "${version}",
 
   "name": "Fixed Villager Trades",
-  "description": "A mod that makes villagers remember their occupation trades.",
+  "description": "A mod that makes villagers remember their profession trades.",
   "authors": [
     "Qu"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Quplet/FixedVillagerTrades",
+    "sources": "https://github.com/Quplet/FixedVillagerTrades",
+    "issues": "https://github.com/Quplet/FixedVillagerTrades/issues"
   },
 
-  "license": "CC0-1.0",
+  "license": "Apache-2.0",
   "icon": "assets/fixed-villager-trades/icon.png",
 
   "environment": "*",

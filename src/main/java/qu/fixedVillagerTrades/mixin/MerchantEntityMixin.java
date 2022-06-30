@@ -13,17 +13,22 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import qu.fixedVillagerTrades.FixedVillagerTrades;
+import qu.fixedVillagerTrades.OfferNbtAccessor;
 
 @Mixin(MerchantEntity.class)
-public abstract class MerchantEntityMixin {
+public abstract class MerchantEntityMixin implements OfferNbtAccessor {
 
     @Shadow @Nullable protected TradeOfferList offers;
+
+    @Shadow public abstract TradeOfferList getOffers();
+
     @Unique
     protected NbtCompound offersNbt = new NbtCompound();
 
     @Inject(method = "getOffers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/MerchantEntity;fillRecipes()V", shift = At.Shift.AFTER))
     private void rememberTrades(CallbackInfoReturnable<TradeOfferList> cir) {
-        if ((MerchantEntity)(Object)this instanceof VillagerEntity villager) {
+        if (FixedVillagerTrades.areTradesFixed() && (MerchantEntity)(Object)this instanceof VillagerEntity villager) {
             VillagerProfession profession = villager.getVillagerData().getProfession();
             if (!profession.equals(VillagerProfession.NONE) && !profession.equals(VillagerProfession.NITWIT)) {
                 for (VillagerProfession profession1 : Registry.VILLAGER_PROFESSION) {
@@ -34,9 +39,22 @@ public abstract class MerchantEntityMixin {
                         } else {
                             offersNbt.put(key, offers.toNbt());
                         }
+                        break;
                     }
                 }
             }
         }
+    }
+
+    @Unique
+    @Override
+    public void setOffersNbt(NbtCompound nbt) {
+        this.offersNbt = nbt;
+    }
+
+    @Unique
+    @Override
+    public NbtCompound getOffersNbt() {
+        return this.offersNbt;
     }
 }

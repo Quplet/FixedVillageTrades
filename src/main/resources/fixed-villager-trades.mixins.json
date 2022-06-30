@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "MerchantEntityMixin",
-    "VillagerEntityMixin"
+    "VillagerEntityMixin",
+    "ZombieEntityMixin",
+    "ZombieVillagerEntityMixin",
+    "TradeOfferMixin"
   ],
   "client": [
   ],

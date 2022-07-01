@@ -15,8 +15,10 @@ feature can be configured in this mod's config file.
 
 ## Setup
 
-This mod is entirely server side. It is not necessary to install it on the client. Servers this is installed on can have vanilla 
-players join and experience it seamlessly. It does not require the Fabric API, only the fabric loader.
+This mod can function entirely serverside. It is not necessary to install it on the client. Servers this is installed on can have vanilla 
+players join and experience the effects. The only catch is if you utilize the Max Discount feature. If you employ this feature, 
+and the clients don't have the mod installed as well, it will display the wrong price if the discount would normally be below 
+the threshold. It does not require the Fabric API, only the fabric loader.
 
 ## License
 

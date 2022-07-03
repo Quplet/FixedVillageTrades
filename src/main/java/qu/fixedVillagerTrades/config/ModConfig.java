@@ -30,7 +30,7 @@ public class ModConfig {
         if (!spec.isCorrect(config)) {
             FixedVillagerTrades.LOGGER.error("One or more config settings were incorrect, setting to default value(s)");
             config.setComment("FixedTrades", "Whether villager trades are fixed to their profession upon generation. Must be either true or false.");
-            config.setComment("MaxDiscount", "The maximum discount a trade can have. Vanilla Minecraft is equivalent to 1.0. Must be between 0.0 and 1.0. If you utilize this, the mod would need to be installed on the client to show the correct price.");
+            config.setComment("MaxDiscount", "The maximum discount a trade can have. Vanilla Minecraft is equivalent to 1.0. Must be between 0.0 and 1.0.");
             ConfigSpec.CorrectionListener listener = (action, path, incorrectValue, correctedValue) -> {
                 String pathString = String.join(",", path);
                 FixedVillagerTrades.LOGGER.error("Corrected " + pathString + ": was " + incorrectValue + ", is now " + correctedValue);

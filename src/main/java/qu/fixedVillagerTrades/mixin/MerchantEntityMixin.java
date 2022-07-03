@@ -29,11 +29,11 @@ public abstract class MerchantEntityMixin implements OfferNbtAccessor {
     @Inject(method = "getOffers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/MerchantEntity;fillRecipes()V", shift = At.Shift.AFTER))
     private void rememberTrades(CallbackInfoReturnable<TradeOfferList> cir) {
         if (FixedVillagerTrades.areTradesFixed() && (MerchantEntity)(Object)this instanceof VillagerEntity villager) {
-            VillagerProfession profession = villager.getVillagerData().getProfession();
-            if (!profession.equals(VillagerProfession.NONE) && !profession.equals(VillagerProfession.NITWIT)) {
-                for (VillagerProfession profession1 : Registry.VILLAGER_PROFESSION) {
-                    if (profession.equals(profession1)) {
-                        String key = profession1.id() + "Offers";
+            VillagerProfession profession1 = villager.getVillagerData().getProfession();
+            if (profession1 != VillagerProfession.NONE && profession1 != VillagerProfession.NITWIT) {
+                for (VillagerProfession profession2 : Registry.VILLAGER_PROFESSION) {
+                    if (profession1 == profession2) {
+                        String key = profession2.id() + "Offers";
                         if (offersNbt.contains(key)) {
                             offers = new TradeOfferList(offersNbt.getCompound(key));
                         } else {

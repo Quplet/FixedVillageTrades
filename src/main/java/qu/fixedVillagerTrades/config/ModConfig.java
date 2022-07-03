@@ -26,7 +26,7 @@ public class ModConfig {
     private static void checkConfig(CommentedFileConfig config) {
         ConfigSpec spec = new ConfigSpec();
         spec.defineInList("FixedTrades", true, Arrays.asList(true, false));
-        spec.defineInRange("MaxDiscount", 1.0, 0.0, 1.0);
+        spec.defineInRange("MaxDiscount", 0.5, 0.0, 1.0);
         if (!spec.isCorrect(config)) {
             FixedVillagerTrades.LOGGER.error("One or more config settings were incorrect, setting to default value(s)");
             config.setComment("FixedTrades", "Whether villager trades are fixed to their profession upon generation. Must be either true or false.");

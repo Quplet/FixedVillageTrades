@@ -10,8 +10,8 @@ reroll professions to get your desired enchanted book. As a result, Mending, the
 With 1.14+, you can place and replace a lectern over and over until you get yourself a nice cheap Mending dispenser. This, 
 in my opinion, is a large oversight from Mojang. This mod merely implements the simplest solution for those who want it.
 
-This mod also limits the max discount a villager trade can have. The default is set to 100%, ie, equivalent to Vanilla. 
-Both this, and the fixed trades feature can be configured in this mod's config file.
+This mod also limits the max discount a villager trade can have. The default is set to 50%. Both this, and the fixed trades 
+feature can be configured in this mod's config file. Setting the max discount to 100% is equivalent to vanilla.
 
 ## Setup
 

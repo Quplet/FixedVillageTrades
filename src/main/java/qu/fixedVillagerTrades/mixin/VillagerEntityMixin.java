@@ -19,14 +19,14 @@ import qu.fixedVillagerTrades.FixedVillagerTrades;
 public abstract class VillagerEntityMixin extends MerchantEntityMixin {
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void writeNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void writeOffersNbtToNbt(NbtCompound nbt, CallbackInfo ci) {
         if (FixedVillagerTrades.areTradesFixed()) {
             nbt.copyFrom(this.offersNbt);
         }
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void readNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void readOffersNbtFromNbt(NbtCompound nbt, CallbackInfo ci) {
         if (FixedVillagerTrades.areTradesFixed()) {
             for (VillagerProfession profession1 : Registry.VILLAGER_PROFESSION) {
                 String key = profession1.id() + "Offers";

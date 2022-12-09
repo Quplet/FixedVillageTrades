@@ -3,7 +3,7 @@ package qu.fixedVillagerTrades.mixin;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.VillagerProfession;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +31,7 @@ public abstract class MerchantEntityMixin implements OfferNbtAccessor {
         if (FixedVillagerTrades.areTradesFixed() && (MerchantEntity)(Object)this instanceof VillagerEntity villager) {
             VillagerProfession profession1 = villager.getVillagerData().getProfession();
             if (profession1 != VillagerProfession.NONE && profession1 != VillagerProfession.NITWIT) {
-                for (VillagerProfession profession2 : Registry.VILLAGER_PROFESSION) {
+                for (VillagerProfession profession2 : Registries.VILLAGER_PROFESSION) {
                     if (profession1 == profession2) {
                         String key = profession2.id() + "Offers";
                         if (offersNbt.contains(key)) {

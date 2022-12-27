@@ -17,7 +17,7 @@ import qu.fixedVillagerTrades.OfferNbtAccessor;
 public class ZombieEntityMixin {
 
     @Inject(method = "onKilledOther", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieVillagerEntity;setOfferData(Lnet/minecraft/nbt/NbtCompound;)V"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void setOffersNbtOnConversion(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir, boolean bl, VillagerEntity villagerEntity, ZombieVillagerEntity zombieVillagerEntity) {
+    private void fixedVillagerTrades$setOffersNbtOnConversion(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir, boolean bl, VillagerEntity villagerEntity, ZombieVillagerEntity zombieVillagerEntity) {
         if (FixedVillagerTrades.areTradesFixed()) {
             ((OfferNbtAccessor) zombieVillagerEntity).setOffersNbt(((OfferNbtAccessor) villagerEntity).getOffersNbt());
         }

@@ -27,7 +27,7 @@ public abstract class MerchantEntityMixin implements OfferNbtAccessor {
     protected NbtCompound offersNbt = new NbtCompound();
 
     @Inject(method = "getOffers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/MerchantEntity;fillRecipes()V", shift = At.Shift.AFTER))
-    private void rememberTrades(CallbackInfoReturnable<TradeOfferList> cir) {
+    private void fixedVillagerTrades$rememberTrades(CallbackInfoReturnable<TradeOfferList> cir) {
         if (FixedVillagerTrades.areTradesFixed() && (MerchantEntity)(Object)this instanceof VillagerEntity villager) {
             VillagerProfession profession1 = villager.getVillagerData().getProfession();
             if (profession1 != VillagerProfession.NONE && profession1 != VillagerProfession.NITWIT) {

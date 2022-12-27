@@ -21,7 +21,7 @@ public class ZombieVillagerEntityMixin implements OfferNbtAccessor {
     private NbtCompound offersNbt = new NbtCompound();
 
     @Inject(method = "finishConversion", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/VillagerEntity;setExperience(I)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void setOffersOnConversion(ServerWorld world, CallbackInfo ci, VillagerEntity villagerEntity) {
+    private void fixedVillagerTrades$setOffersOnConversion(ServerWorld world, CallbackInfo ci, VillagerEntity villagerEntity) {
         if (FixedVillagerTrades.areTradesFixed()) {
             ((OfferNbtAccessor) villagerEntity).setOffersNbt(this.offersNbt);
         }
@@ -40,14 +40,14 @@ public class ZombieVillagerEntityMixin implements OfferNbtAccessor {
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void writeOffersNbtToNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void fixedVillagerTrades$writeOffersNbtToNbt(NbtCompound nbt, CallbackInfo ci) {
         if (FixedVillagerTrades.areTradesFixed()) {
             nbt.copyFrom(this.offersNbt);
         }
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void readOffersNbtFromNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void fixedVillagerTrades$readOffersNbtFromNbt(NbtCompound nbt, CallbackInfo ci) {
         if (FixedVillagerTrades.areTradesFixed()) {
             for (VillagerProfession profession1 : Registries.VILLAGER_PROFESSION) {
                 String key = profession1.id() + "Offers";

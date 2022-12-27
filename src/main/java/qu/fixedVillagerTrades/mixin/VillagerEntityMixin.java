@@ -17,14 +17,14 @@ import qu.fixedVillagerTrades.FixedVillagerTrades;
 public abstract class VillagerEntityMixin extends MerchantEntityMixin {
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void writeOffersNbtToNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void fixedVillagerTrades$writeOffersNbtToNbt(NbtCompound nbt, CallbackInfo ci) {
         if (FixedVillagerTrades.areTradesFixed()) {
             nbt.copyFrom(this.offersNbt);
         }
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void readOffersNbtFromNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void fixedVillagerTrades$readOffersNbtFromNbt(NbtCompound nbt, CallbackInfo ci) {
         if (FixedVillagerTrades.areTradesFixed()) {
             for (VillagerProfession profession1 : Registries.VILLAGER_PROFESSION) {
                 String key = profession1.id() + "Offers";
@@ -36,7 +36,7 @@ public abstract class VillagerEntityMixin extends MerchantEntityMixin {
     }
 
     @Inject(method = "prepareOffersFor", at = @At(value = "TAIL"))
-    private void adjustForMaxDiscount(PlayerEntity player, CallbackInfo ci) {
+    private void fixedVillagerTrades$adjustForMaxDiscount(PlayerEntity player, CallbackInfo ci) {
         for (TradeOffer offer : this.getOffers()) {
             int minPrice = Math.max(1, (int)(offer.getOriginalFirstBuyItem().getCount() * (1.0 - FixedVillagerTrades.getMaxDiscount())));
             if (offer.getAdjustedFirstBuyItem().getCount() < minPrice) {

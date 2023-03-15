@@ -30,4 +30,8 @@ public class FixedVillagerTrades implements ModInitializer {
 	public static float getMaxDiscount() {
 		return MOD_CONFIG.MAX_DISCOUNT;
 	}
+
+	public static boolean areProfessionsLocked() {
+		return MOD_CONFIG.FIX_PROFESSION;
+	}
 }

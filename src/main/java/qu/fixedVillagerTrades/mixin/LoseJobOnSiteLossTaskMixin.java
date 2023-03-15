@@ -3,14 +3,12 @@ package qu.fixedVillagerTrades.mixin;
 import net.minecraft.entity.ai.brain.task.LoseJobOnSiteLossTask;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.server.world.ServerWorld;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import qu.fixedVillagerTrades.FixedVillagerTrades;
 
-@Debug(export = true)
 @Mixin(LoseJobOnSiteLossTask.class)
 public class LoseJobOnSiteLossTaskMixin {
 

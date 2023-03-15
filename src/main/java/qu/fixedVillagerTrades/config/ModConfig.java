@@ -34,7 +34,7 @@ public class ModConfig {
 
         FixedVillagerTrades.LOGGER.error("One or more config settings were incorrect, setting to default value(s)");
         config.setComment("FixedTrades", "Whether villager trades are fixed to their profession upon generation. Must be either true or false.");
-        config.setComment("FixedProfession", "Whether villager professions are fixed upon acquiring them. Must be either true or false");
+        config.setComment("FixedProfession", "Whether villager professions are fixed upon acquiring them. Must be either true or false.");
         config.setComment("MaxDiscount", "The maximum discount a trade can have. Vanilla Minecraft is equivalent to 1.0. Must be between 0.0 and 1.0.");
         spec.correct(config, (action, path, incorrectValue, correctedValue) -> {
             String pathString = String.join(",", path);

@@ -20,7 +20,7 @@ public class ZombieVillagerEntityMixin implements OfferNbtAccessor {
     @Unique
     private NbtCompound offersNbt = new NbtCompound();
 
-    @Inject(method = "finishConversion", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/VillagerEntity;setExperience(I)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "finishConversion", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/VillagerEntity;setExperience(I)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
     private void fixedVillagerTrades$setOffersOnConversion(ServerWorld world, CallbackInfo ci, VillagerEntity villagerEntity) {
         if (FixedVillagerTrades.areTradesFixed()) {
             ((OfferNbtAccessor) villagerEntity).setOffersNbt(this.offersNbt);

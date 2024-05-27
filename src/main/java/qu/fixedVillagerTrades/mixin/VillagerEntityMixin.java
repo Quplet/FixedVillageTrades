@@ -39,7 +39,7 @@ public abstract class VillagerEntityMixin extends MerchantEntityMixin {
     private void fixedVillagerTrades$adjustForMaxDiscount(PlayerEntity player, CallbackInfo ci) {
         for (TradeOffer offer : this.getOffers()) {
             int minPrice = Math.max(1, (int)(offer.getOriginalFirstBuyItem().getCount() * (1.0 - FixedVillagerTrades.getMaxDiscount())));
-            if (offer.getAdjustedFirstBuyItem().getCount() < minPrice) {
+            if (offer.getDisplayedFirstBuyItem().getCount() < minPrice) {
                 // basically reverses the price calculation to result in it being the min price
                 offer.setSpecialPrice(minPrice - offer.getOriginalFirstBuyItem().getCount() - Math.max(0, MathHelper.floor((float)(offer.getOriginalFirstBuyItem().getCount() * offer.getDemandBonus()) * offer.getPriceMultiplier())));
             }

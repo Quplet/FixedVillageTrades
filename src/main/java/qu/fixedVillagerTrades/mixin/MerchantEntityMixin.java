@@ -3,10 +3,14 @@ package qu.fixedVillagerTrades.mixin;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.Registries;
+import net.minecraft.util.Util;
 import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.VillagerProfession;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,6 +22,9 @@ import qu.fixedVillagerTrades.OfferNbtAccessor;
 
 @Mixin(MerchantEntity.class)
 public abstract class MerchantEntityMixin implements OfferNbtAccessor {
+
+    @Shadow @Final
+    private static Logger LOGGER;
 
     @Shadow @Nullable protected TradeOfferList offers;
 
@@ -34,11 +41,10 @@ public abstract class MerchantEntityMixin implements OfferNbtAccessor {
                 for (VillagerProfession profession2 : Registries.VILLAGER_PROFESSION) {
                     if (profession1 == profession2) {
                         String key = profession2.id() + "Offers";
-                        if (offersNbt.contains(key)) {
-                            offers = new TradeOfferList(offersNbt.getCompound(key));
-                        } else {
-                            offersNbt.put(key, offers.toNbt());
-                        }
+                        TradeOfferList.CODEC.parse(((MerchantEntity)(Object)this).getRegistryManager().getOps(NbtOps.INSTANCE), offersNbt.get(key)).resultOrPartial(Util.addPrefix("Failed to load offers: ", LOGGER::warn)).ifPresentOrElse(
+                                offers -> this.offers = offers,
+                                () -> offersNbt.put(key, TradeOfferList.CODEC.encodeStart(((MerchantEntity)(Object)this).getRegistryManager().getOps(NbtOps.INSTANCE), offers).getOrThrow())
+                        );
                         break;
                     }
                 }

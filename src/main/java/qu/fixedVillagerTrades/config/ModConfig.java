@@ -22,7 +22,7 @@ public class ModConfig {
         FIX_PROFESSION = config.get("FixedProfession");
         MAX_DISCOUNT = ((Double)config.get("MaxDiscount")).floatValue();
         config.close();
-        FixedVillagerTrades.LOGGER.info("Fixed Trades: " + FIX_TRADES + ", Fixed Profession: " + FIX_PROFESSION + ", Max Discount: " + MAX_DISCOUNT);
+        FixedVillagerTrades.LOGGER.info("Fixed Trades: {}, Fixed Profession: {}, Max Discount: {}", FIX_TRADES, FIX_PROFESSION, MAX_DISCOUNT);
     }
 
     private static void checkConfig(CommentedFileConfig config) {
@@ -38,7 +38,7 @@ public class ModConfig {
         config.setComment("MaxDiscount", "The maximum discount a trade can have. Vanilla Minecraft is equivalent to 1.0. Must be between 0.0 and 1.0.");
         spec.correct(config, (action, path, incorrectValue, correctedValue) -> {
             String pathString = String.join(",", path);
-            FixedVillagerTrades.LOGGER.error("Corrected " + pathString + ": was " + incorrectValue + ", is now " + correctedValue);
+            FixedVillagerTrades.LOGGER.error("Corrected {}: was {}, is now {}", pathString, incorrectValue, correctedValue);
         });
         config.save();
     }
